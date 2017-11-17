@@ -1,0 +1,15 @@
+.WarehouseNametextRight{
+    text-align: right;
+}
+.WarehouseNametext{
+    text-align: left;
+}
+.ivu-table .demo-table-info-row td{
+    cursor: pointer;
+}
+.ivu-table .demo-row td{
+    background: #dbdfe2!important;
+}
+.exch-list .ivu-menu-vertical .ivu-menu-submenu-title{
+    padding: 6px!important;
+}
