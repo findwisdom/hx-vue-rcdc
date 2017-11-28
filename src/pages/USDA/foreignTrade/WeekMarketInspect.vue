@@ -118,7 +118,7 @@
     import 'echarts/lib/component/title'
     import 'echarts/lib/component/tooltip'
     import 'echarts/lib/component/legend'
-    const ENDTIME = 17
+//    const ENDTIME = 17
     import { InspectVari } from './../../../config/apiConfig.js'
     import {mapActions, mapGetters} from 'vuex'
     import Q from 'q'
@@ -264,7 +264,8 @@
         },
         computed: {
             ...mapGetters([
-                'getLocationList'
+                'getLocationList',
+                'getYearList'
             ]),
             shVariDict: function () {
                 var patt = new RegExp(this.filterVariCode, 'i')
@@ -292,7 +293,7 @@
             optionTime: function () {
                 let timeArray = []
                 if (this.selectVari) {
-                    for (let i = 0; i < ENDTIME; i++) {
+                    for (let i = 0; i < this.getYearList; i++) {
                         if (i < 9) {
                             let time = `200${i}/0${i + 1}`
                             let value = {
@@ -522,7 +523,6 @@
                             series.push(maxline)
                             series.push(Averageline)
                             series.push(minline)
-                            console.log(series)
                             legendData.push('平均值')
                             _self.chartOption.legend.data = legendData
                             _self.chartOption.series = series

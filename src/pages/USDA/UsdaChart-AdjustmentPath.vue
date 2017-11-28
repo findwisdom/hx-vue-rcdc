@@ -115,7 +115,11 @@ export default {
     },
     computed: {
         chartDataSetting () {
-            let xx = usdaColumns[this.$route.query.name].filter(function (item) {
+            let VariCode = this.$route.query.name
+            if (!usdaColumns[VariCode]) {
+                VariCode = 'Soybeans'
+            }
+            let xx = usdaColumns[VariCode].filter(function (item) {
                 return item.type === 'Number'
             })
             this.chartSetting.dataItem = xx[0].key
@@ -136,11 +140,11 @@ export default {
     },
     methods: {
         getChartMAP: function () {
+            let _self = this
             if (this.chartSetting.years.length === 0) {
                 this.$Message.error('至少要选择一个年份', 1)
                 return
             }
-
             var url = getODataApi('AdjustmentPath')
             var filter = this.payload
             if (filter.Variety === 'Wheat') {
@@ -154,6 +158,13 @@ export default {
             url = encodeURI(url)
             o(urlAppend(url, {r: Math.random()})).get().then(
                 (response) => {
+                    if (response.data.xAxisData.length === 0) {
+                        _self.$Notice.open({
+                            title: '提示',
+                            desc: '暂无数据'
+                        })
+                        return
+                    }
                     this.chartOption.xAxis.data = response.data.xAxisData
                     this.chartOption.series = response.data.series
                     this.chartOption.legend.data = response.data.legendData

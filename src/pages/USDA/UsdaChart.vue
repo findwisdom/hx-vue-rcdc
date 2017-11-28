@@ -27,7 +27,7 @@
                 </Row>
             </div>
             <div class="content-wrap">
-                <Tabs value="name1">
+                <Tabs v-model="name" @on-click="tabChange">
                     <Tab-pane label="月度报告调整统计" name="name1">
                         <month-adjustment-plan></month-adjustment-plan>
                     </Tab-pane>
@@ -36,6 +36,9 @@
                     </Tab-pane>
                     <Tab-pane label="项目调整路径" name="name3">
                         <adjustment-path></adjustment-path>
+                    </Tab-pane>
+                    <Tab-pane label="优良率种植进度" name="name4">
+                        <plant></plant>
                     </Tab-pane>
                 </Tabs>
             </div>
@@ -52,17 +55,21 @@
 import MonthAdjustmentPlan from './UsdaChart-MonthAdjustmentPlan.vue'
 import YearlyData from './UsdaChart-YearlyData.vue'
 import AdjustmentPath from './UsdaChart-AdjustmentPath.vue'
-import { WsdeVari } from './../../config/apiConfig.js'
+import Plant from './UsdaChart-Plant.vue'
+import { WsdeVari, ExcellentRateVari } from './../../config/apiConfig.js'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
     components: {
         'month-adjustment-plan': MonthAdjustmentPlan,
         'yearly-data': YearlyData,
-        'adjustment-path': AdjustmentPath
+        'adjustment-path': AdjustmentPath,
+        'plant': Plant
     },
     data () {
         // let _this = this
         return {
+            name: 'name1',
             accordion: true,
             openNames: [],
             selectVari: null,
@@ -72,10 +79,17 @@ export default {
         }
     },
     created () {
-        this.TradeVari = WsdeVari
         var variCode = this.$route.params.TradeVariCode
+        if (this.name === 'name4') {
+            this.TradeVari = ExcellentRateVari
+        } else {
+            this.TradeVari = WsdeVari
+        }
         this.variCode = variCode
         if (variCode) {
+            if (variCode === 'Winter Wheat' || variCode === 'Spring Wheat') {
+                variCode = 'Wheat'
+            }
             this.variCode = variCode
             this.$router.push({
                 name: 'UsdaChart',
@@ -91,38 +105,58 @@ export default {
                 }
             }
         }
+        this.setPlantVariData(this.selectVari)
+        if (this.name === 'name4') {
+            this.setPlantLocalList()
+        }
     },
     mounted: function () {
+        this.setPlantYearList()
 //        let _self = this
     },
     computed: {
+        ...mapGetters([
+            'getPlantVariData'
+        ]),
         shVariDict: function () {
-            var patt = new RegExp(this.filterVariCode, 'i')
-            var result = this.TradeVari.filter((item) => {
-                return patt.test(item.VariCode) || patt.test(item.VariCode.toLowerCase()) || patt.test(item.VariName)
-            })
-            if (this.filterVariCode) {
-                this.accordion = false
-                this.openNames = ['A', 'B', 'C']
-                this.$nextTick(function () {
-                    this.$refs.leftMenu.updateOpened()
-                    this.$refs.leftMenu.updateActiveName()
+            if (this.TradeVari.filter) {
+                var patt = new RegExp(this.filterVariCode, 'i')
+                var result = this.TradeVari.filter((item) => {
+                    return patt.test(item.VariCode) || patt.test(item.VariCode.toLowerCase()) || patt.test(item.VariName)
                 })
-            } else {
-                this.accordion = true
-                if (this.selectVari) {
-                    this.openNames = [this.selectVari.ExchCode]
+                if (this.filterVariCode) {
+                    this.accordion = false
+                    this.openNames = ['A', 'B', 'C']
                     this.$nextTick(function () {
                         this.$refs.leftMenu.updateOpened()
+                        this.$refs.leftMenu.updateActiveName()
                     })
+                } else {
+                    this.accordion = true
+                    if (this.selectVari) {
+                        this.openNames = [this.selectVari.ExchCode]
+                        this.$nextTick(function () {
+                            this.$refs.leftMenu.updateOpened()
+                        })
+                    }
                 }
+                return result
             }
-            return result
         }
     },
     methods: {
+        ...mapActions([
+            'setPlantVariData',
+            'setPlantLocalList',
+            'setPlantYearList'
+        ]),
         // 选择品种
         changeVari: function (name) {
+            if (this.name === 'name4') {
+                this.TradeVari = ExcellentRateVari
+            } else {
+                this.TradeVari = WsdeVari
+            }
             this.$router.push({name: 'UsdaChart', params: {TradeVariCode: name}, query: {name: name}})
             this.variCode = name
             var variArr = [this.TradeVari]
@@ -133,6 +167,40 @@ export default {
                     }
                 }
             }
+            if (this.name === 'name4') {
+                this.setPlantLocalList()
+            }
+            this.setPlantVariData(this.selectVari)
+        },
+        tabChange () {
+            let name = this.$route.params.TradeVariCode
+            let variCode = this.$route.params.TradeVariCode
+            this.variCode = variCode
+            if (this.name === 'name4') {
+                if (variCode === 'SoybeanOils' || variCode === 'SoybeanMeals' || variCode === 'Wheat') {
+                    this.$router.push({name: 'UsdaChart', params: {TradeVariCode: 'Soybeans'}, query: {name: 'Soybeans'}})
+                    this.variCode = 'Soybeans'
+                }
+                this.TradeVari = ExcellentRateVari
+            } else {
+                if (this.$route.params.TradeVariCode === 'Winter Wheat' || this.$route.params.TradeVariCode === 'Spring Wheat') {
+                    this.$router.push({name: 'UsdaChart', params: {TradeVariCode: 'Soybeans'}, query: {name: 'Soybeans'}})
+                    this.variCode = 'Soybeans'
+                }
+                this.TradeVari = WsdeVari
+            }
+            var variArr = [this.TradeVari]
+            for (var i = 0; i < variArr.length; i++) {
+                for (var j = 0; j < variArr[i].length; j++) {
+                    if (variArr[i][j].VariCode === name) {
+                        this.selectVari = variArr[i][j]
+                    }
+                }
+            }
+            if (this.name === 'name4') {
+                this.setPlantLocalList()
+            }
+            this.setPlantVariData(this.selectVari)
         }
     }
 }

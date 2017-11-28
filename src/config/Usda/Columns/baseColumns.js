@@ -1,7 +1,7 @@
 const base = [{
     title: '名称',
     key: 'Name',
-    width: 90,
+    width: 120,
     search_hide: 1,
     fixed: 'left',
     type: ''

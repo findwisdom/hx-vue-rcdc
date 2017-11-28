@@ -171,7 +171,7 @@
     import 'echarts/lib/component/tooltip'
     import 'echarts/lib/component/legend'
     import {mapActions, mapGetters} from 'vuex'
-    const ENDTIME = 17
+//    const ENDTIME = 17
     import { TradeVari } from './../../../config/apiConfig.js'
     import Q from 'q'
     import o from 'o.js'
@@ -328,6 +328,7 @@
             }
         },
         mounted: function () {
+            this.setyearList()
             this.setlocationList()
             this.TradeVari = TradeVari
             var variCode = this.$route.params.TradeVariCode
@@ -358,7 +359,8 @@
         },
         computed: {
             ...mapGetters([
-                'getLocationList'
+                'getLocationList',
+                'getYearList'
             ]),
             shVariDict: function () {
                 var patt = new RegExp(this.filterVariCode, 'i')
@@ -386,7 +388,7 @@
             optionTime: function () {
                 let timeArray = []
                 if (this.selectVari) {
-                    for (let i = 0; i < ENDTIME; i++) {
+                    for (let i = 0; i < this.getYearList; i++) {
                         if (i < 9) {
                             let time = `200${i}/0${i + 1}`
                             let value = {
@@ -441,7 +443,8 @@
         },
         methods: {
             ...mapActions([
-                'setlocationList'
+                'setlocationList',
+                'setyearList'
             ]),
             changeData () {
                 if (document.createEvent) {

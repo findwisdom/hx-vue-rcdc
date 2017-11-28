@@ -1,21 +1,17 @@
-# rcdc-js-client
+## RCDC
+> 纪录本项目每个版本的功能迭代情况
 
-> rdc js client
+## v1.1.4.0 版本
 
-## Build Setup
+### （一）优良率种植进度模块新增
 
-``` bash
-# install dependencies
-npm install
+* WASDE数据分析新增模块优良率种植进度
 
-# serve with hot reload at localhost:8080
-npm run dev
+### （二）出口合理化分析
 
-# build for production with minification
-npm run build
+* 新增品种： 软红冬小麦，硬红冬小麦，硬红春小麦
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+### （三）WASDE界面调整
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+* WASDE界面调整，图表无数据时弹出提示框提示
+

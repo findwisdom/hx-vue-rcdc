@@ -82,7 +82,7 @@ const actions = {
             yearFull = yearFull + 1
         }
         let webApiRootSite = localStorage.getItem('ImApiUrl')
-        let url = `${webApiRootSite}/SalesDataWeekReport?$filter=(Commodity eq 'Soybeans' and (`
+        let url = `${webApiRootSite}SalesDataWeekReport?$filter=(Commodity eq '${menu}' and (`
         for (let i = 2000; i < yearFull; i++) {
             if (i === yearFull - 1) {
                 url = url + `Year eq '${i}/${i + 1}'))&$orderby= Week desc&$top=1`

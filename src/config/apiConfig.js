@@ -10,6 +10,7 @@ export const InspectVari = config.InspectVari
 export const ExportAnalysis = config.ExportAnalysis
 export const WsdeVari = config.WsdeVari
 export const CustomsVari = config.CustomsVari
+export const ExcellentRateVari = config.ExcellentRateVari
 /* eslint-enable */
 
 export function getApi (controller) {

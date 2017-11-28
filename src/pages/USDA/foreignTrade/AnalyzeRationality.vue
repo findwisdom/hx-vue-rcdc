@@ -302,6 +302,7 @@
                         }
                     }
                 }
+                this.setyearList(name)
             },
             getObj () {
                 let _self = this

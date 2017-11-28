@@ -12,14 +12,21 @@ config = {
         {'ExchCode': 'A', 'VariCode': 'Corn', 'VariName': '玉米', 'StartTime': '9', 'EndTime': '9'},
         {'ExchCode': 'A', 'VariCode': 'Cotton', 'VariName': '棉花', 'StartTime': '8', 'EndTime': '8'}
     ],
+    //
+    ExcellentRateVari: [{'ExchCode': 'A', 'VariCode': 'Soybeans', 'VariName': '大豆', 'StartTime': '04-01', 'EndTime': '11-30'},
+        {'ExchCode': 'A', 'VariCode': 'Winter Wheat', 'VariName': '冬麦', 'StartTime': '04-01', 'EndTime': '08-31'},
+        {'ExchCode': 'A', 'VariCode': 'Spring Wheat', 'VariName': '春麦', 'StartTime': '04-01', 'EndTime': '11-30'},
+        {'ExchCode': 'A', 'VariCode': 'Corn', 'VariName': '玉米', 'StartTime': '04-01', 'EndTime': '11-30'},
+        {'ExchCode': 'A', 'VariCode': 'Cotton', 'VariName': '棉花', 'StartTime': '04-01', 'EndTime': '11-30'}
+    ],
     // WSDE数据品种
     WsdeVari: [{'ExchCode': 'A', 'VariCode': 'Soybeans', 'VariName': '大豆', 'StartTime': '05-01', 'EndTime': '09-07'},
         {'ExchCode': 'A', 'VariCode': 'SoybeanOils', 'VariName': '豆油', 'StartTime': '05-01', 'EndTime': '10-07'},
         {'ExchCode': 'A', 'VariCode': 'SoybeanMeals', 'VariName': '豆粕', 'StartTime': '05-01', 'EndTime': '08-07'},
         {'ExchCode': 'A', 'VariCode': 'Wheat', 'VariName': '所有小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
-        // {'ExchCode': 'A', 'VariCode': 'Wheat-SRW', 'VariName': '软红冬小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
-        // {'ExchCode': 'A', 'VariCode': 'Wheat-HRW', 'VariName': '硬红冬小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
-        // {'ExchCode': 'A', 'VariCode': 'Wheat-HRS', 'VariName': '硬红春小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
+        {'ExchCode': 'A', 'VariCode': 'Wheatsrws', 'VariName': '软红冬小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
+        {'ExchCode': 'A', 'VariCode': 'Wheathrws', 'VariName': '硬红冬小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
+        {'ExchCode': 'A', 'VariCode': 'Wheathrs', 'VariName': '硬红春小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
         {'ExchCode': 'A', 'VariCode': 'Corn', 'VariName': '玉米', 'StartTime': '05-01', 'EndTime': '08-07'},
         {'ExchCode': 'A', 'VariCode': 'Cotton', 'VariName': '棉花', 'StartTime': '05-01', 'EndTime': '08-07'}
     ],
@@ -44,9 +51,9 @@ config = {
         {'ExchCode': 'A', 'VariCode': 'Soybean cake & meal', 'VariName': '豆粕', 'StartTime': '05-01', 'EndTime': '10-07'},
         {'ExchCode': 'A', 'VariCode': 'Soybean Oil', 'VariName': '豆油', 'StartTime': '05-01', 'EndTime': '10-07'},
         {'ExchCode': 'A', 'VariCode': 'All Wheats', 'VariName': '所有小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
-        // {'ExchCode': 'A', 'VariCode': 'Wheat-SRW', 'VariName': '软红冬小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
-        // {'ExchCode': 'A', 'VariCode': 'Wheat-HRW', 'VariName': '硬红东小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
-        // {'ExchCode': 'A', 'VariCode': 'Wheat-HRS', 'VariName': '硬红春小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
+        {'ExchCode': 'A', 'VariCode': 'Wheat-SRW', 'VariName': '软红冬小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
+        {'ExchCode': 'A', 'VariCode': 'Wheat-HRW', 'VariName': '硬红冬小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
+        {'ExchCode': 'A', 'VariCode': 'Wheat-HRS', 'VariName': '硬红春小麦', 'StartTime': '05-01', 'EndTime': '07-07'},
         {'ExchCode': 'A', 'VariCode': 'All Upland Cotton', 'VariName': '棉花', 'StartTime': '05-01', 'EndTime': '08-07'}],
     // 上海期货交易所品种
     shVari: [{'ExchCode': 'A', 'VariCode': 'cu', 'VariName': '铜'},
